@@ -1,0 +1,486 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_forecast
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-20 11:46+0000\n"
+"PO-Revision-Date: 2018-07-20 11:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_actual_qty
+msgid "Actual Qty"
+msgstr "Cantidad real"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.load_purchase_forecast_from_sale_wizard
+#: model:ir.ui.view,arch_db:purchase_forecast.load_sale_forecast_wizard
+#: model:ir.ui.view,arch_db:purchase_forecast.load_self_purchase_forecast_wizard
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_generic_load_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_purchase_forecast_load_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_product_categ_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_product_categ_id
+msgid "Category"
+msgstr "Categoría"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_commercial_id
+msgid "Commercial"
+msgstr "Comercial"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.load_purchase_forecast_from_sale_wizard
+#: model:ir.ui.view,arch_db:purchase_forecast.load_sale_forecast_wizard
+#: model:ir.ui.view,arch_db:purchase_forecast.load_self_purchase_forecast_wizard
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_create_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_create_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_create_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_create_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_create_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_create_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_create_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_create_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_create_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_create_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_create_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_create_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_date
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+msgid "Date"
+msgstr "Fecha"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_date_from
+msgid "Date From"
+msgstr "Fecha desde"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_date_to
+msgid "Date To"
+msgstr "Fecha hasta"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_date_from
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_date_from
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_date_from
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_search_view
+msgid "Date from"
+msgstr "Fecha desde"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_date_to
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_date_to
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_date_to
+msgid "Date to"
+msgstr "Fecha hasta"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_display_name
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_display_name
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_display_name
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_display_name
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_display_name
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_display_name
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_factor
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_factor
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_factor
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_factor
+msgid "Factor"
+msgstr "Factor"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_forecast_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_forecast_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_forecast_id
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+msgid "Forecast"
+msgstr "Previsión"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_forecast_lines
+msgid "Forecast Lines"
+msgstr "Líneas de Previsión"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load___last_update
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast___last_update
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line___last_update
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale___last_update
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load___last_update
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load___last_update
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_write_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_write_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_write_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_write_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_write_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_write_uid
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_write_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_write_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_write_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_write_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_write_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_write_date
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+msgid "Lines"
+msgstr "Compras"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_generic_load_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_purchase_forecast_load_form_view
+msgid "Load"
+msgstr "Cargar"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.view_forecast_sale_inherit_form
+msgid "Load Purchase Forecast"
+msgstr "Cargar previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_purchase_forecast_load_form_view
+msgid "Load Purchases"
+msgstr "Cargar compras"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+msgid "Load Sale Forecast"
+msgstr "Cargar previsión de venta"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_generic_load_form_view
+msgid "Load Sales"
+msgstr "Cargar Ventas"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_forecast_sale_load
+msgid "Load forecast from existing sale forecast"
+msgstr "Cargar previsión desde previsión de ventas existente"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.load_purchase_forecast_from_sale_wizard
+#: model:ir.ui.view,arch_db:purchase_forecast.load_sale_forecast_wizard
+#: model:ir.ui.view,arch_db:purchase_forecast.load_self_purchase_forecast_wizard
+msgid "Load from sale forecast"
+msgstr "Cargar previsión de venta"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_purchase_forecast_load_from_sale
+msgid "Load purchase forecast"
+msgstr "Cargar previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_self_purchase_forecast_load
+msgid "Load purchase forecast from existing purchase forecast"
+msgstr "Cargar previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.actions.act_window,name:purchase_forecast.action_load_self_purchase_forecast_act_window
+msgid "Load purchase forecast from purchase forecast"
+msgstr "Cargar previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.actions.act_window,name:purchase_forecast.action_load_purchase_forecast_from_sale_act_window
+msgid "Load purchase forecast from sale forecast"
+msgstr "Cargar previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+msgid "Load purchases"
+msgstr "Cargar compras"
+
+#. module: purchase_forecast
+#: model:ir.actions.act_window,name:purchase_forecast.load_sale_forecast_act_window
+msgid "Load sale forecast from purchase forecast"
+msgstr "Load sale forecast from purchase forecast"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_purchase_sale_forecast_load
+msgid "Load sales for purchase forecast"
+msgstr "Cargar ventas para previsión de compras"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+msgid "Nombre"
+msgstr "Nombre"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_partner_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_partner_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_partner_id
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_search_view
+msgid "Partner"
+msgstr "Proveedor"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_sale_forecast_purchase_forecast_count
+msgid "Photo Requests"
+msgstr "Photo Requests"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.view_purchase_forecast_line_pivot
+msgid "Pivot view"
+msgstr "Pivot view"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_product_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_product_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_product_id
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+msgid "Product"
+msgstr "Producto"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_product_category_id
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+msgid "Product category"
+msgstr "Categoría de producto"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_purchase_id
+msgid "Purchase"
+msgstr "Compra"
+
+#. module: purchase_forecast
+#: model:ir.actions.act_window,name:purchase_forecast.action_purchase_forecast_form
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_forecast_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_forecast_purchase
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_order_purchase_forecast_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_forecast_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_self_purchase_forecast_load_forecast_purchase
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_tree_view
+msgid "Purchase Forecast"
+msgstr "Previsión Compra"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_tree_editable
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_view_form
+msgid "Purchase Forecast Line"
+msgstr "Línea de previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+msgid "Purchase Forecast Line Search"
+msgstr "Busqueda de línea de previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.actions.act_window,name:purchase_forecast.action_purchase_view_forecast_line
+#: model:ir.ui.menu,name:purchase_forecast.menu_stock_sale_forecast_lines
+msgid "Purchase Forecast Lines"
+msgstr "Líneas de previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_search_view
+msgid "Purchase Forecast Search"
+msgstr "Previsión de compra"
+
+#. module: purchase_forecast
+#: model:ir.ui.menu,name:purchase_forecast.menu_purchase_forecast
+#: model:ir.ui.menu,name:purchase_forecast.menu_stock_sale_forecast_all
+#: model:ir.ui.view,arch_db:purchase_forecast.view_forecast_sale_inherit_form
+msgid "Purchase Forecasts"
+msgstr "Previsión de compras"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_purchase_order_ids
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+msgid "Purchase Orders"
+msgstr "Pedidos de compra"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_purchase_order_count
+msgid "Purchase Orders Count"
+msgstr "Contador pedidos de compra"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_qty
+msgid "Quantity"
+msgstr "Cantidad Prevista"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+msgid "Recalculate actual qty"
+msgstr "Recalcular cantidad real"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_sale_id
+msgid "Sale"
+msgstr "Venta"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_forecast_sale_load_forecast_sales
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_load_from_sale_forecast_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_sale_forecast_id
+msgid "Sale Forecast"
+msgstr "Previsión de venta"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_subtotal
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_purchase_forecast_load_product_tmpl_id
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_sale_forecast_load_product_tmpl_id
+msgid "Template"
+msgstr "Plantilla"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,help:purchase_forecast.field_purchase_forecast_line_commercial_id
+msgid "The internal user that is in charge of communicating with this contact if any."
+msgstr "El usuario interno encargado de comunicarse con este contacto si lo hubiese."
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_tree_editable
+msgid "Total"
+msgstr "Total"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_tree_editable
+msgid "Total Actual Qty"
+msgstr "Cantidad total real"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_tree_editable
+msgid "Total Qty"
+msgstr "Cantidad total"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_unit_price
+msgid "Unit Price"
+msgstr "Precio unitario"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_form_view
+msgid "Update Suppliers"
+msgstr "Actualizar Proveedores"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_line_used_in
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_line_search_view
+msgid "Used in"
+msgstr "Usado en"
+
+#. module: purchase_forecast
+#: model:ir.model.fields,field_description:purchase_forecast.field_purchase_forecast_warehouse_id
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: purchase_forecast
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_forecast_generic_load_form_view
+#: model:ir.ui.view,arch_db:purchase_forecast.purchase_purchase_forecast_load_form_view
+msgid "or"
+msgstr "o"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_sale_forecast
+msgid "sale.forecast"
+msgstr "sale.forecast"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_purchase_forecast
+msgid "purchase.forecast"
+msgstr "purchase.forecast"
+
+#. module: purchase_forecast
+#: model:ir.model,name:purchase_forecast.model_purchase_forecast_line
+msgid "purchase.forecast.line"
+msgstr "purchase.forecast.line"
+
+#. module: purchase_forecast
+#: model:ir.actions.act_window,name:purchase_forecast.action_purchase_purchase_forecast_load_view
+#: model:ir.model,name:purchase_forecast.model_purchase_purchase_forecast_load
+msgid "purchase.purchase.forecast.load"
+msgstr "purchase.purchase.forecast.load"
+
+#. module: purchase_forecast
+#: model:ir.actions.act_window,name:purchase_forecast.action_purchase_forecast_generic_load_view
+msgid "purchase.sale.forecast.load"
+msgstr "purchase.sale.forecast.load"

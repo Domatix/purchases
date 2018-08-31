@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <menuitem id="menu_purchase_forecast" name="Purchase Forecasts"
+            parent="purchase.menu_purchase_root" sequence="2" groups="base.group_user"/>
+
+        <record model="ir.ui.view" id="purchase_forecast_line_view_form">
+            <field name="name">purchase.forecast.line.form</field>
+            <field name="model">purchase.forecast.line</field>
+            <field name="priority" eval="50"/>
+            <field name="arch" type="xml">
+                <form string="Purchase Forecast Line">
+                    <sheet>
+                        <group>
+                            <group colspan="4" col="4">
+                                <field name="forecast_id" colspan="4"/>
+                                <field name="partner_id" colspan="4"/>
+                                <field name="commercial_id" invisible="1" readonly="1"/>
+                                <field name="date" invisible="1"/>
+                            </group>
+                            <group colspan="4" col="6">
+                                <field name="product_id" colspan="3"/>
+                                <field name="qty"  colspan="2"/>
+                                <field name="actual_qty" colspan="2"/>
+                                <field name="unit_price"  colspan="2"/>
+                                <field name="subtotal" colspan="2"/>
+                                <field name="currency_id" invisible="1" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_forecast_line_tree_editable">
+            <field name="name">purchase.forecast.line.editable.tree</field>
+            <field name="model">purchase.forecast.line</field>
+            <field name="arch" type="xml">
+                <tree string="Purchase Forecast Line" editable="bottom">
+                    <field name="forecast_id"/>
+                    <field name="product_id" required="1"/>
+                    <field name="used_in" readonly="1"/>
+                    <field name="partner_id" readonly="1"/>
+                    <field name="unit_price"/>
+                    <field name="qty" sum="Total Qty"/>
+                    <field name="actual_qty" sum="Total Actual Qty" />
+                    <field name="subtotal" sum="Total"/>
+                    <field name="commercial_id" invisible="1" readonly="1"/>
+                    <field name="currency_id" invisible="1" readonly="1"/>
+                    <field name="date" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_forecast_line_search_view">
+            <field name="name">purchase.forecast.line.search</field>
+            <field name="model">purchase.forecast.line</field>
+            <field name="arch" type="xml">
+                <search string="Purchase Forecast Line Search">
+                    <field name="forecast_id" />
+                    <field name="partner_id" />
+                    <field name="date" />
+                    <field name="product_id" />
+                    <group expand="0" string="Group By">
+                        <filter string="Forecast" context="{'group_by':'forecast_id'}" />
+                        <filter string="Partner" context="{'group_by':'partner_id'}" />
+                        <filter string="Date" invisible="1" context="{'group_by':'date'}" />
+                        <filter string="Product" context="{'group_by':'product_id'}" />
+                        <filter string="Used in" context="{'group_by':'used_in'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_purchase_view_forecast_line" model="ir.actions.act_window">
+            <field name="name">Purchase Forecast Lines</field>
+            <field name="res_model">purchase.forecast.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,pivot</field>
+        </record>
+        <record id="view_purchase_forecast_line_pivot" model="ir.ui.view">
+        <field name="name">view.purchase_forecast_line_pivot</field>
+        <field name="model">purchase.forecast.line</field>
+        <field name="arch" type="xml">
+        <pivot string="Pivot view">
+          <field name="product_id" type="row" />
+          <field name="date_to" type="col" />
+          <field name="qty" type="measure" />
+          <field name="actual_qty" type="measure" />
+
+        </pivot>
+        </field>
+        </record>
+        <record model="ir.ui.view" id="purchase_forecast_form_view">
+            <field name="name">purchase.forecast.form</field>
+            <field name="model">purchase.forecast</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Forecast">
+                    <header>
+                        <button name="%(action_purchase_forecast_generic_load_view)d" type="action" string="Load Sales"  groups="sales_team.group_sale_manager"/>
+                        <button name="%(action_purchase_purchase_forecast_load_view)d" type="action" string="Load purchases" groups="purchase.group_purchase_manager"/>
+                        <button name="%(load_sale_forecast_act_window)d" type="action" string="Load Sale Forecast" groups="sales_team.group_sale_manager"/>
+                        <button name="%(action_load_self_purchase_forecast_act_window)d" type="action" string="Load Purchase Forecast" groups="sales_team.group_sale_manager"/>
+                          <button name="update_suppliers" string="Update Suppliers" type="object"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                          <button type="object" class="oe_stat_button" name="action_view_purchase_orders"
+                            icon="fa fa-shopping-cart">
+                            <field string="Purchase Orders" name="purchase_order_count" widget="statinfo"/>
+                          </button>
+
+                        </div>
+                        <div class="oe_title">
+                          <h1>
+                              <field name="name" placeholder="Nombre"/>
+                          </h1>
+                        </div>
+                        <group>
+                            <group colspan="4" col="4">
+                                <field name="date_from" />
+                                <field name="date_to"/>
+                            </group>
+                            <group colspan="4" col="4" string="Lines">
+                                <field name="forecast_lines" colspan="4" nolabel="1">
+                                  <tree editable="bottom">
+                                    <field name="date" invisible="1"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="commercial_id" invisible="1" readonly="1"/>
+                                    <field name="used_in"/>
+                                    <field name="product_id" required="1"/>
+                                    <field name="qty" sum="Total Qty"/>
+                                    <field name="actual_qty" sum="Total Actual Qty" />
+                                    <field name="unit_price" readonly="1"/>
+                                    <field name="subtotal" sum="Total"/>
+                                    <field name="currency_id" invisible="1" readonly="1"/>
+                                  </tree>
+                                </field>
+                                  <button name="recalculate_actual_qty" string="Recalculate actual qty" type="object"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_forecast_tree_view">
+            <field name="name">purchase.forecast.tree</field>
+            <field name="model">purchase.forecast</field>
+            <field name="priority" eval="50"/>
+            <field name="arch" type="xml">
+                <tree string="Purchase Forecast">
+                    <field name="name"/>
+                    <field name="date_from" />
+                    <field name="date_to"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_forecast_search_view">
+            <field name="name">purchase.forecast.search</field>
+            <field name="model">purchase.forecast</field>
+            <field name="arch" type="xml">
+                <search string="Purchase Forecast Search">
+                    <field name="name"/>
+                    <field name="date_from" />
+                    <field name="date_to" />
+                    <group expand="0" string="Group By">
+                        <filter string="Partner" domain="[]"
+                            name="partner_id"
+                            context="{'group_by':'partner_id'}" />
+                        <filter string="Date from "
+                            name="date_from"
+                            domain="[]" context="{'group_by':'date_from'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_purchase_forecast_form" model="ir.actions.act_window">
+            <field name="name">Purchase Forecast</field>
+            <field name="res_model">purchase.forecast</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="menu_stock_sale_forecast_all" name="Purchase Forecasts"
+            parent="menu_purchase_forecast" action="action_purchase_forecast_form"
+            groups="base.group_user"/>
+        <menuitem id="menu_stock_sale_forecast_lines" name="Purchase Forecast Lines"
+            parent="menu_purchase_forecast" action="action_purchase_view_forecast_line"
+            groups="base.group_user"/>
+
+</odoo>

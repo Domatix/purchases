@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_forecast_sale_inherit_form" model="ir.ui.view">
+  <field name="name">view.forecast_sale_inherit.form</field>
+  <field name="model">sale.forecast</field>
+  <field name='inherit_id' ref='sale_forecast.sale_forecast_form_view'/>
+  <field name="arch" type="xml">
+    <xpath expr="//div[@class='oe_button_box']" position="inside">
+      <button class="oe_inline oe_stat_button" type="object" name="create_purchase_forecast" icon="fa-shopping-cart">
+          <field string="Purchase Forecasts" name="purchase_forecast_count" widget="statinfo"/>
+      </button>
+  </xpath>
+<xpath expr="//header" position="inside">
+  <button name="%(action_load_purchase_forecast_from_sale_act_window)d" type="action" string="Load Purchase Forecast" groups="sales_team.group_sale_manager"/>
+</xpath>
+  </field>
+  </record>
+
+</odoo>

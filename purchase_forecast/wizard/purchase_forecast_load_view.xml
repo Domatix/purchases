@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record model="ir.ui.view" id="purchase_forecast_generic_load_form_view">
+            <field name="name">purchase.sale.forecast.load.sale.form</field>
+            <field name="model">purchase.sale.forecast.load</field>
+            <field name="arch" type="xml">
+                <form string="Load Sales">
+                    <group colspan="4" col="4">
+                        <field name="partner_id" select="1" colspan="4"
+                        domain="[('customer','=',True)]"
+                        context="{'search_default_customer':1, 'show_address': 1}"/>
+                        <field name="sale_id" invisible="1"/>
+                        <field name="forecast_id" invisible="1" required="1"/>
+                        <field name="date_from" select="1" required="1"/>
+                        <field name="date_to" select="1" required="1"/>
+                        <field name="factor"/>
+                        <field name="product_categ_id" select="1"/>
+                        <newline/>
+                        <field name="product_id" select="1" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="load_sales" type="object"
+                        string="Load" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_purchase_forecast_generic_load_view">
+            <field name="name">purchase.sale.forecast.load</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.sale.forecast.load</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="purchase_forecast_generic_load_form_view"/>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_purchase_forecast_load_form_view">
+            <field name="name">purchase.purchase.forecast.load.form</field>
+            <field name="model">purchase.purchase.forecast.load</field>
+            <field name="arch" type="xml">
+                <form string="Load Purchases">
+                    <group colspan="4" col="4">
+                        <field name="partner_id" select="1" colspan="4"
+                        context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
+                        domain="[('supplier','=',True)]"/>
+                        <field name="purchase_id" invisible="1"/>
+                        <field name="forecast_id" invisible="1" required="1"/>
+                        <field name="date_from" select="1" required="1"/>
+                        <field name="date_to" select="1" required="1"/>
+                        <field name="factor"/>
+                        <field name="product_categ_id" select="1"/>
+                        <newline/>
+                        <field name="product_id" select="1" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="load_purchases" type="object"
+                        string="Load" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link"
+                        special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_purchase_purchase_forecast_load_view">
+            <field name="name">purchase.purchase.forecast.load</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.purchase.forecast.load</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="purchase_purchase_forecast_load_form_view"/>
+        </record>
+
+        <record id="load_sale_forecast_wizard" model="ir.ui.view">
+            <field name="name">load_sale_forecast.wizard</field>
+            <field name="model">forecast.sale.load</field>
+            <field name="arch"  type="xml">
+                <form string="Load from sale forecast">
+                  <group name="load_sale_forecast">
+                    <field name="forecast_id" invisible="1" />
+
+                    <field name="forecast_sales" required="1" />
+                    <field name="factor" required="1" />
+
+                  </group>
+                    <footer>
+                        <button name="button_confirm" type="object"
+                            class="oe_highlight" string="Confirm"/>
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="load_sale_forecast_act_window" model="ir.actions.act_window">
+            <field name="name">Load sale forecast from purchase forecast</field>
+            <field name="res_model">forecast.sale.load</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="load_self_purchase_forecast_wizard" model="ir.ui.view">
+            <field name="name">load_self_purchase_forecast.wizard</field>
+            <field name="model">self.purchase.forecast.load</field>
+            <field name="arch"  type="xml">
+                <form string="Load from sale forecast">
+                  <group name="load_sale_forecast">
+                    <field name="forecast_id" invisible="1" />
+
+                    <field name="forecast_purchase" required="1" />
+                    <field name="factor" required="1" />
+
+                  </group>
+                    <footer>
+                        <button name="button_confirm" type="object"
+                            class="oe_highlight" string="Confirm"/>
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_load_self_purchase_forecast_act_window" model="ir.actions.act_window">
+            <field name="name">Load purchase forecast from purchase forecast</field>
+            <field name="res_model">self.purchase.forecast.load</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="load_purchase_forecast_from_sale_wizard" model="ir.ui.view">
+            <field name="name">load_self_purchase_from_sale_forecast.wizard</field>
+            <field name="model">purchase.forecast.load.from.sale</field>
+            <field name="arch"  type="xml">
+                <form string="Load from sale forecast">
+                  <group name="load_sale_forecast">
+                    <field name="forecast_id" invisible="1" />
+
+                    <field name="forecast_purchase" required="1" />
+
+                  </group>
+                    <footer>
+                        <button name="button_confirm" type="object"
+                            class="oe_highlight" string="Confirm"/>
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_load_purchase_forecast_from_sale_act_window" model="ir.actions.act_window">
+            <field name="name">Load purchase forecast from sale forecast</field>
+            <field name="res_model">purchase.forecast.load.from.sale</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+</odoo>
