@@ -168,7 +168,7 @@ class PurchaseForecastLine(models.Model):
                                  domain="[('purchase_ok','=',True)]",
                                  string='Product')
     used_in = fields.Many2one('product.product', string='Used in')
-    qty = fields.Float('Quantity', default=1,
+    qty = fields.Float('Expected Quantity', default=1,
                        digits=dp.get_precision('Product Unit of Measure'))
     unit_price = fields.Float('Unit Price',
                               digits=dp.get_precision('Product Price'))

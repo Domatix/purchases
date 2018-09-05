@@ -30,7 +30,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="action_purchase_forecast_generic_load_view">
-            <field name="name">purchase.sale.forecast.load</field>
+            <field name="name">Load sales</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">purchase.sale.forecast.load</field>
             <field name="view_type">form</field>
@@ -69,7 +69,7 @@
         </record>
 
         <record model="ir.actions.act_window" id="action_purchase_purchase_forecast_load_view">
-            <field name="name">purchase.purchase.forecast.load</field>
+            <field name="name">Load purchases</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">purchase.purchase.forecast.load</field>
             <field name="view_type">form</field>
@@ -100,7 +100,7 @@
         </record>
 
         <record id="load_sale_forecast_act_window" model="ir.actions.act_window">
-            <field name="name">Load sale forecast from purchase forecast</field>
+            <field name="name">Load sale forecast</field>
             <field name="res_model">forecast.sale.load</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
@@ -128,7 +128,7 @@
         </record>
 
         <record id="action_load_self_purchase_forecast_act_window" model="ir.actions.act_window">
-            <field name="name">Load purchase forecast from purchase forecast</field>
+            <field name="name">Load purchase forecast</field>
             <field name="res_model">self.purchase.forecast.load</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
