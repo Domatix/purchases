@@ -57,8 +57,8 @@ class SaleForecast(models.Model):
                         })
                     else:
                         materials += get_purchase_materials(
-                                                    bom_line.product_id,
-                                                    bom_line.product_qty * qty)
+                            bom_line.product_id,
+                            bom_line.product_qty * qty)
             return materials
         for record in self:
             purchase_forecast_id = self.env['purchase.forecast'].search([

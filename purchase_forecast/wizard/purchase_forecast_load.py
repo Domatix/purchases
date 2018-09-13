@@ -86,22 +86,22 @@ class ForecastLoad(models.TransientModel):
                 used_mat = material['used_in']
                 used_in = used_mat.id if used_mat else False
                 line_dest = forecast_line_obj.search([
-                            ('forecast_id', '=', self.forecast_id.id),
-                            ('product_id', '=', material['product_id'].id),
-                            ('used_in', '=', used_in)
-                            ])
+                    ('forecast_id', '=', self.forecast_id.id),
+                    ('product_id', '=', material['product_id'].id),
+                    ('used_in', '=', used_in)
+                    ])
                 if line_dest:
                     line_dest.qty += material['product_uom_qty']
                     line_dest.update_supplier()
                 else:
                     self.forecast_id.write({'forecast_lines': [(0, 0, {
-                                    'product_id': material['product_id'].id,
-                                    'used_in': used_in,
-                                    'unit_price': unit_price,
-                                    'qty':  material['product_uom_qty'],
-                                    'partner_id': partner,
-                                })],
-                                })
+                        'product_id': material['product_id'].id,
+                        'used_in': used_in,
+                        'unit_price': unit_price,
+                        'qty':  material['product_uom_qty'],
+                        'partner_id': partner,
+                    })],
+                    })
 
 
 class SelfPurchaseForecastLoad(models.TransientModel):
@@ -133,22 +133,22 @@ class SelfPurchaseForecastLoad(models.TransientModel):
         for line in self.forecast_purchase.forecast_lines:
             used_in = line.used_in.id if line.used_in else False
             line_dest = forecast_line_obj.search([
-                        ('forecast_id', '=', self.forecast_id.id),
-                        ('product_id', '=', line.product_id.id),
-                        ('used_in', '=', used_in)
-                        ])
+                ('forecast_id', '=', self.forecast_id.id),
+                ('product_id', '=', line.product_id.id),
+                ('used_in', '=', used_in)
+                ])
             if line_dest:
                 line_dest.qty += int(line.qty * self.factor)
                 line_dest.update_supplier()
             else:
                 self.forecast_id.write({'forecast_lines': [(0, 0, {
-                                    'product_id': line.product_id.id,
-                                    'used_in': used_in,
-                                    'unit_price': line.unit_price,
-                                    'qty': int(line.qty * self.factor),
-                                    'partner_id': line.partner_id.id,
-                                })],
-                                })
+                    'product_id': line.product_id.id,
+                    'used_in': used_in,
+                    'unit_price': line.unit_price,
+                    'qty': int(line.qty * self.factor),
+                    'partner_id': line.partner_id.id,
+                })],
+                })
 
 
 class PurchaseForecastLoadFromSale(models.TransientModel):
@@ -177,14 +177,14 @@ class PurchaseForecastLoadFromSale(models.TransientModel):
         for line in self.forecast_purchase.forecast_lines:
             forecast_line_obj = self.env['sale.forecast.line']
             line_dest = forecast_line_obj.search([
-                        ('forecast_id', '=', self.forecast_id.id),
-                        ('partner_id', '=', line.partner_id.id),
-                        ('product_id', '=', line.product_id.id)
-                        ])
+                ('forecast_id', '=', self.forecast_id.id),
+                ('partner_id', '=', line.partner_id.id),
+                ('product_id', '=', line.product_id.id)
+                ])
             if line_dest:
                 line_dest.unit_price = (line_dest.unit_price * line_dest.qty
                                         + line.unit_price * line.qty) / (
-                                        line_dest.qty + line.qty)
+                    line_dest.qty + line.qty)
 
                 line_dest.qty += line.qty
             else:
@@ -377,7 +377,7 @@ class PurchaseSaleForecastLoad(models.TransientModel):
                     'product_id': material['product_id'].id,
                     'product_uom_qty': material['product_uom_qty'],
                     'price_subtotal': material['product_uom_qty'] * material[
-                                                'product_id'].standard_price
+                        'product_id'].standard_price
                     })
 
         return sale_lines_to_purchase
@@ -404,22 +404,22 @@ class PurchaseSaleForecastLoad(models.TransientModel):
                         partner_id = seller.name.id
 
                     line = forecast_line_obj.search([
-                            ('forecast_id', '=', self.forecast_id.id),
-                            ('used_in', '=', used_in.id if used_in else False),
-                            ('product_id', '=', product.id)
-                                ])
+                        ('forecast_id', '=', self.forecast_id.id),
+                        ('used_in', '=', used_in.id if used_in else False),
+                        ('product_id', '=', product.id)
+                        ])
                     if line:
                         line.qty += prod_vals['qty']
                         line.update_supplier()
                     else:
                         forecast_line_vals = {
-                                'used_in': used_in.id if used_in else False,
-                                'product_id': product.id,
-                                'forecast_id': self.forecast_id.id,
-                                'partner_id': partner_id,
-                                'qty': prod_vals['qty'],
-                                'unit_price': seller.price if seller else False
-                                              }
+                            'used_in': used_in.id if used_in else False,
+                            'product_id': product.id,
+                            'forecast_id': self.forecast_id.id,
+                            'partner_id': partner_id,
+                            'qty': prod_vals['qty'],
+                            'unit_price': seller.price if seller else False
+                        }
                         forecast_line_obj.create(forecast_line_vals)
         return True
 
@@ -556,11 +556,11 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
             for product in result[partner].keys():
                 prod_vals = result[partner][product]
                 line = forecast_line_obj.search([
-                            ('forecast_id', '=', self.forecast_id.id),
-                            ('used_in', '=', False),
-                            ('partner_id', '=', partner),
-                            ('product_id', '=', product)
-                            ])
+                    ('forecast_id', '=', self.forecast_id.id),
+                    ('used_in', '=', False),
+                    ('partner_id', '=', partner),
+                    ('product_id', '=', product)
+                    ])
                 if line:
                     line.qty += prod_vals['qty']
                 else:
