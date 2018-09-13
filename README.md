@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/Domatix/sales.svg?branch=11.0)](https://travis-ci.org/Domatix/purchases)
-[![codecov](https://codecov.io/gh/Domatix/sales/branch/11.0/graph/badge.svg)](https://codecov.io/gh/Domatix/purchases)
+[![Build Status](https://travis-ci.org/Domatix/purchases.svg?branch=11.0)](https://travis-ci.org/Domatix/purchases)
+[![codecov](https://codecov.io/gh/Domatix/purchases/branch/11.0/graph/badge.svg)](https://codecov.io/gh/Domatix/purchases)
 
 <h2>Compras</h2>
 
