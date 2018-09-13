@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -101,17 +100,17 @@ class PurchaseForecast(models.Model):
                     'type': 'ir.actions.act_window',
                 }
 
-    @api.one
     @api.depends('purchase_order_ids')
     def _compute_purchase_order_count(self):
-        self.purchase_order_count = len(self.purchase_order_ids)
+        for record in self:
+            record.purchase_order_count = len(record.purchase_order_ids)
 
-    @api.one
     @api.constrains('date_from', 'date_to')
     def check_dates(self):
-        if self.date_from >= self.date_to:
-            raise exceptions.Warning(_('Error! Date to must be lower '
-                                       'than date from.'))
+        for record in self:
+            if record.date_from >= record.date_to:
+                raise exceptions.Warning(_('Error! Date to must be lower '
+                                           'than date from.'))
 
     @api.multi
     def update_suppliers(self):
@@ -154,10 +153,10 @@ class PurchaseForecastLine(models.Model):
     _name = 'purchase.forecast.line'
     _order = 'partner_id, product_id, forecast_id, qty'
 
-    @api.one
     @api.depends('unit_price', 'qty')
     def _get_subtotal(self):
-        self.subtotal = self.unit_price * self.qty
+        for record in self:
+            record.subtotal = record.unit_price * record.qty
 
     @api.onchange('product_id')
     def onchange_product(self):
