@@ -83,7 +83,6 @@ class TestPurchaseForecastFlow(common.TransactionCase):
                 context).create(
             {
                 'factor': 3,
-                'forecast_id': pf.id,
                 'product_id': self.productpf.id
             })
 
@@ -183,7 +182,6 @@ class TestPurchaseForecastFlow(common.TransactionCase):
         load_sale_forecast_wizard_dict = \
             self.env['forecast.sale.load'].with_context(context).create(
                 {
-                    'forecast_id': empty_pf.id,
                     'forecast_sales': sf.id
                 })
         load_sale_forecast_wizard_dict.button_confirm()
@@ -319,7 +317,6 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             self.env['self.purchase.forecast.load'].with_context(context).\
             create(
                 {
-                    'forecast_id': empty_pf.id,
                     'forecast_purchase': pf.id
                 })
         load_purchase_forecast_wizard_dict.button_confirm()

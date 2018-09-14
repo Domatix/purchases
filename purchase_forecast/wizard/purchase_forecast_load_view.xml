@@ -9,7 +9,6 @@
                         <field name="partner_id" select="1" colspan="4"
                         domain="[('customer','=',True)]"
                         context="{'search_default_customer':1, 'show_address': 1}"/>
-                        <field name="sale_id" invisible="1"/>
                         <field name="forecast_id" invisible="1" required="1"/>
                         <field name="date_from" select="1" required="1"/>
                         <field name="date_to" select="1" required="1"/>
@@ -48,7 +47,6 @@
                         <field name="partner_id" select="1" colspan="4"
                         context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}"
                         domain="[('supplier','=',True)]"/>
-                        <field name="purchase_id" invisible="1"/>
                         <field name="forecast_id" invisible="1" required="1"/>
                         <field name="date_from" select="1" required="1"/>
                         <field name="date_to" select="1" required="1"/>
