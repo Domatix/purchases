@@ -246,3 +246,24 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             sum(pf.forecast_lines.mapped('actual_qty')),
             1,
             'Actual quantities are not computed proper.')
+
+    def test_create_purchase_forecast(self):
+        sf_vals = {
+            'name': 'Test 4',
+            'date_from': date.today() + relativedelta(years=1),
+            'date_to': date.today() + relativedelta(years=2),
+            'forecast_lines': [
+                (0, 0, {
+                    'product_id': self.productpf.id,
+                    'qty': 1,
+                })
+            ]
+        }
+        sf = self.sf_model.create(sf_vals)
+        sf.create_purchase_forecast()
+        pf = self.env['purchase.forecast'].search([(
+            'sale_forecast_id', '=', sf.id)])
+        self.assertEqual(
+            sum(pf.forecast_lines.mapped('qty')),
+            sum(sf.forecast_lines.mapped('qty')),
+            'Purchase forecast not created properly.')
