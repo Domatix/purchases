@@ -267,3 +267,63 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             sum(pf.forecast_lines.mapped('qty')),
             sum(sf.forecast_lines.mapped('qty')),
             'Purchase forecast not created properly.')
+
+    def test_action_view_purchase_orders(self):
+        pf_vals = {
+            'name': 'Test 5',
+            'date_from': date.today() + relativedelta(months=-1),
+            'date_to': date.today() + relativedelta(months=1),
+            'forecast_lines': [
+                (0, 0, {
+                    'partner_id': self.partner_agrolite.id,
+                    'product_id': self.productpf.id,
+                    'qty': 1,
+                })
+            ]
+        }
+        pf = self.pf_model.create(pf_vals)
+        pf.action_view_purchase_orders()
+        self.assertEqual(
+            sum(pf.purchase_order_ids.order_line.mapped('product_qty')),
+            sum(pf.forecast_lines.mapped('qty')),
+            'Purchase order not created properly.')
+
+    def test_purchase_forecast_load_purchase_forecast(self):
+        """ Test purchase forecast flow."""
+        pf_vals = {
+            'name': 'Test 6',
+            'date_from': date.today() + relativedelta(years=1),
+            'date_to': date.today() + relativedelta(years=2),
+            'forecast_lines': [
+                (0, 0, {
+                    'product_id': self.productpf.id,
+                    'qty': 1,
+                })
+            ]
+        }
+        pf = self.pf_model.create(pf_vals)
+
+        empty_pf_vals = {
+            'name': 'Test 7',
+            'date_from': date.today() + relativedelta(years=1),
+            'date_to': date.today() + relativedelta(years=2),
+        }
+        empty_pf = self.pf_model.create(empty_pf_vals)
+        context = {
+            "active_model": 'purchase.forecast',
+            "active_ids": [empty_pf.id],
+            "active_id": empty_pf.id
+            }
+
+        load_purchase_forecast_wizard_dict = \
+            self.env['self.purchase.forecast.load'].with_context(context).\
+            create(
+                {
+                    'forecast_id': empty_pf.id,
+                    'forecast_purchase': pf.id
+                })
+        load_purchase_forecast_wizard_dict.button_confirm()
+        self.assertEqual(
+            sum(empty_pf.forecast_lines.mapped('qty')),
+            1,
+            'Purchase forecasts are not loaded proper.')
