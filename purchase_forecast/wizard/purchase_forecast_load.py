@@ -312,10 +312,10 @@ class PurchaseSaleForecastLoad(models.TransientModel):
             if used_in not in res[partner][product]:
                 res[partner][product][used_in] = {'qty': 0.0, 'amount': 0.0}
             product_dict = res[partner][product][used_in]
-            sum_qty = product_dict['qty'] + sale['product_uom_qty']
+            sum_qty = product_dict['qty'] + sale['product_uom_qty'] * factor
             sum_subtotal = (product_dict['amount'] +
                             sale['price_subtotal'])
-            product_dict['qty'] = sum_qty * factor
+            product_dict['qty'] = sum_qty
             product_dict['amount'] = sum_subtotal
         return res
 
@@ -330,7 +330,8 @@ class PurchaseSaleForecastLoad(models.TransientModel):
             sales = self.sale_id
         else:
             sale_domain = [('date_order', '>=', self.date_from),
-                           ('date_order', '<=', self.date_to)]
+                           ('date_order', '<=', self.date_to),
+                           ('state', 'in', ['sale', 'done'])]
             if self.partner_id:
                 sale_domain += [('partner_id', '=', self.partner_id.id)]
             sales = sale_obj.search(sale_domain)
@@ -510,10 +511,10 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
             if product not in res[partner]:
                 res[partner][product] = {'qty': 0.0, 'amount': 0.0}
             product_dict = res[partner][product]
-            sum_qty = product_dict['qty'] + purchase.product_qty
+            sum_qty = product_dict['qty'] + purchase.product_qty * factor
             sum_subtotal = (product_dict['amount'] +
                             purchase.price_subtotal)
-            product_dict['qty'] = sum_qty * factor
+            product_dict['qty'] = sum_qty
             product_dict['amount'] = sum_subtotal
         return res
 
@@ -528,7 +529,8 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
             purchases = self.purchase_id
         else:
             purchase_domain = [('date_order', '>=', self.date_from),
-                               ('date_order', '<=', self.date_to)]
+                               ('date_order', '<=', self.date_to),
+                               ('state','in',['purchase','done'])]
             if self.partner_id:
                 purchase_domain += [('partner_id', '=', self.partner_id.id)]
             purchases = purchase_obj.search(purchase_domain)
