@@ -29,7 +29,6 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             'categ_id': self.env.ref('product.product_category_all').id,
         })
 
-    #load sales
     def test_load_sales(self):
         """ Test purchase forecast flow."""
         uom_id = self.product_uom_model.search([('name', '=', 'Unit(s)')])[0]
@@ -79,8 +78,9 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             "active_id": pf.id
             }
 
-        load_sales_wizard_dict = self.env['purchase.sale.forecast.load'].with_context(
-            context).create(
+        load_sales_wizard_dict = self.env['purchase.sale.forecast.load'].\
+            with_context(
+                context).create(
             {
                 'factor': 3,
                 'forecast_id': pf.id,
@@ -92,7 +92,7 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             sum(pf.forecast_lines.mapped('qty')),
             3,
             'Sales are not loaded proper.')
-    #Load purchases
+
     def test_load_purchases(self):
         """ Test purchase forecast flow."""
         po_vals = {
@@ -139,8 +139,9 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             "active_id": pf.id
             }
 
-        load_sales_wizard_dict = self.env['purchase.purchase.forecast.load'].with_context(
-            context).create(
+        load_sales_wizard_dict = self.env['purchase.purchase.forecast.load'].\
+            with_context(
+                context).create(
             {
                 'factor': 3,
                 'forecast_id': pf.id,
@@ -152,7 +153,6 @@ class TestPurchaseForecastFlow(common.TransactionCase):
             3,
             'Purchases are not loaded proper.')
 
-    #load sale forecast
     def test_purchase_forecast_load_sale_forecast(self):
         """ Test purchase forecast flow."""
         sf_vals = {
