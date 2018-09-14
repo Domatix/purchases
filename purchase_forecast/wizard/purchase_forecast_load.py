@@ -530,7 +530,7 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
         else:
             purchase_domain = [('date_order', '>=', self.date_from),
                                ('date_order', '<=', self.date_to),
-                               ('state','in',['purchase','done'])]
+                               ('state', 'in', ['purchase', 'done'])]
             if self.partner_id:
                 purchase_domain += [('partner_id', '=', self.partner_id.id)]
             purchases = purchase_obj.search(purchase_domain)
