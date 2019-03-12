@@ -191,4 +191,14 @@
             parent="menu_purchase_forecast" action="action_purchase_view_forecast_line"
             groups="base.group_user"/>
 
+        <record id="view_purchase_order_filter" model="ir.ui.view">
+          <field name="name">request.quotation.select.origin</field>
+          <field name="model">purchase.order</field>
+          <field name='inherit_id' ref='purchase.view_purchase_order_filter'/>
+          <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+              <field name="origin"/>
+            </field>
+          </field>
+        </record>
 </odoo>
