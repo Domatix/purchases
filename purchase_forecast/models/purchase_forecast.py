@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -47,13 +46,13 @@ class PurchaseForecast(models.Model):
             ('purchase_forecast_id', '=', self.id)])
         if orders:
             return {
-                    'name': "Purchase Orders from "+self.name,
-                    'view_type': 'form',
-                    'view_mode': 'tree,form',
-                    'res_model': 'purchase.order',
-                    'domain':  [('purchase_forecast_id', '=', self.id)],
-                    'type': 'ir.actions.act_window',
-                }
+                'name': "Purchase Orders from "+self.name,
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'purchase.order',
+                'domain':  [('purchase_forecast_id', '=', self.id)],
+                'type': 'ir.actions.act_window',
+            }
         else:
             for line in self.forecast_lines:
                 if not line.partner_id:
@@ -76,15 +75,15 @@ class PurchaseForecast(models.Model):
                     qty = sum(same_product_lines.mapped('qty'))
                     today = fields.datetime.today()
                     line = {
-                                'product_id': product.id,
-                                'name': product.name,
-                                'product_qty': qty,
-                                'product_uom': product.uom_po_id.id,
-                                'price_unit': 0.0,
-                                'order_id': order.id,
-                                'date_planned': today.strftime(
-                                            DEFAULT_SERVER_DATETIME_FORMAT),
-                            }
+                        'product_id': product.id,
+                        'name': product.name,
+                        'product_qty': qty,
+                        'product_uom': product.uom_po_id.id,
+                        'price_unit': 0.0,
+                        'order_id': order.id,
+                        'date_planned': today.strftime(
+                            DEFAULT_SERVER_DATETIME_FORMAT),
+                    }
                     line = self.env['purchase.order.line'].create(line)
                     line.onchange_product_id()
                     line.product_qty = qty
@@ -93,25 +92,25 @@ class PurchaseForecast(models.Model):
 
                 order.origin = "Previsión de compra: "+self.name
             return {
-                    'name': "Pedidos de compra de "+self.name,
-                    'view_type': 'form',
-                    'view_mode': 'tree,form',
-                    'res_model': 'purchase.order',
-                    'domain':  [('purchase_forecast_id', '=', self.id)],
-                    'type': 'ir.actions.act_window',
-                }
+                'name': "Pedidos de compra de "+self.name,
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'purchase.order',
+                'domain':  [('purchase_forecast_id', '=', self.id)],
+                'type': 'ir.actions.act_window',
+            }
 
-    @api.one
     @api.depends('purchase_order_ids')
     def _compute_purchase_order_count(self):
-        self.purchase_order_count = len(self.purchase_order_ids)
+        for record in self:
+            record.purchase_order_count = len(record.purchase_order_ids)
 
-    @api.one
     @api.constrains('date_from', 'date_to')
     def check_dates(self):
-        if self.date_from >= self.date_to:
-            raise exceptions.Warning(_('Error! Date to must be lower '
-                                       'than date from.'))
+        for record in self:
+            if record.date_from >= record.date_to:
+                raise exceptions.Warning(_('Error! Date to must be lower '
+                                           'than date from.'))
 
     @api.multi
     def update_suppliers(self):
@@ -154,10 +153,10 @@ class PurchaseForecastLine(models.Model):
     _name = 'purchase.forecast.line'
     _order = 'partner_id, product_id, forecast_id, qty'
 
-    @api.one
     @api.depends('unit_price', 'qty')
     def _get_subtotal(self):
-        self.subtotal = self.unit_price * self.qty
+        for record in self:
+            record.subtotal = record.unit_price * record.qty
 
     @api.onchange('product_id')
     def onchange_product(self):

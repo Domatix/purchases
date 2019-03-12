@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -87,22 +86,22 @@ class ForecastLoad(models.TransientModel):
                 used_mat = material['used_in']
                 used_in = used_mat.id if used_mat else False
                 line_dest = forecast_line_obj.search([
-                            ('forecast_id', '=', self.forecast_id.id),
-                            ('product_id', '=', material['product_id'].id),
-                            ('used_in', '=', used_in)
-                            ])
+                    ('forecast_id', '=', self.forecast_id.id),
+                    ('product_id', '=', material['product_id'].id),
+                    ('used_in', '=', used_in)
+                    ])
                 if line_dest:
                     line_dest.qty += material['product_uom_qty']
                     line_dest.update_supplier()
                 else:
                     self.forecast_id.write({'forecast_lines': [(0, 0, {
-                                    'product_id': material['product_id'].id,
-                                    'used_in': used_in,
-                                    'unit_price': unit_price,
-                                    'qty':  material['product_uom_qty'],
-                                    'partner_id': partner,
-                                })],
-                                })
+                        'product_id': material['product_id'].id,
+                        'used_in': used_in,
+                        'unit_price': unit_price,
+                        'qty':  material['product_uom_qty'],
+                        'partner_id': partner,
+                    })],
+                    })
 
 
 class SelfPurchaseForecastLoad(models.TransientModel):
@@ -134,22 +133,22 @@ class SelfPurchaseForecastLoad(models.TransientModel):
         for line in self.forecast_purchase.forecast_lines:
             used_in = line.used_in.id if line.used_in else False
             line_dest = forecast_line_obj.search([
-                        ('forecast_id', '=', self.forecast_id.id),
-                        ('product_id', '=', line.product_id.id),
-                        ('used_in', '=', used_in)
-                        ])
+                ('forecast_id', '=', self.forecast_id.id),
+                ('product_id', '=', line.product_id.id),
+                ('used_in', '=', used_in)
+                ])
             if line_dest:
                 line_dest.qty += int(line.qty * self.factor)
                 line_dest.update_supplier()
             else:
                 self.forecast_id.write({'forecast_lines': [(0, 0, {
-                                    'product_id': line.product_id.id,
-                                    'used_in': used_in,
-                                    'unit_price': line.unit_price,
-                                    'qty': int(line.qty * self.factor),
-                                    'partner_id': line.partner_id.id,
-                                })],
-                                })
+                    'product_id': line.product_id.id,
+                    'used_in': used_in,
+                    'unit_price': line.unit_price,
+                    'qty': int(line.qty * self.factor),
+                    'partner_id': line.partner_id.id,
+                })],
+                })
 
 
 class PurchaseForecastLoadFromSale(models.TransientModel):
@@ -178,14 +177,14 @@ class PurchaseForecastLoadFromSale(models.TransientModel):
         for line in self.forecast_purchase.forecast_lines:
             forecast_line_obj = self.env['sale.forecast.line']
             line_dest = forecast_line_obj.search([
-                        ('forecast_id', '=', self.forecast_id.id),
-                        ('partner_id', '=', line.partner_id.id),
-                        ('product_id', '=', line.product_id.id)
-                        ])
+                ('forecast_id', '=', self.forecast_id.id),
+                ('partner_id', '=', line.partner_id.id),
+                ('product_id', '=', line.product_id.id)
+                ])
             if line_dest:
                 line_dest.unit_price = (line_dest.unit_price * line_dest.qty
                                         + line.unit_price * line.qty) / (
-                                        line_dest.qty + line.qty)
+                    line_dest.qty + line.qty)
 
                 line_dest.qty += line.qty
             else:
@@ -204,14 +203,6 @@ class PurchaseSaleForecastLoad(models.TransientModel):
     _name = 'purchase.sale.forecast.load'
     _description = 'Load sales for purchase forecast'
 
-    def _get_default_partner(self):
-        model = self.env.context.get('active_model', False)
-        record = self.env[model].browse(self.env.context.get('active_id'))
-        partner = False
-        if model == 'sale.order':
-            partner = record.partner_id
-        return partner
-
     def _get_default_forecast(self):
         model = self.env.context.get('active_model', False)
         record = self.env[model].browse(self.env.context.get('active_id'))
@@ -220,21 +211,11 @@ class PurchaseSaleForecastLoad(models.TransientModel):
             forecast = record.id
         return forecast
 
-    def _get_default_sale(self):
-        model = self.env.context.get('active_model', False)
-        record = self.env[model].browse(self.env.context.get('active_id'))
-        sale = False
-        if model == 'sale.order':
-            sale = record.id
-        return sale
-
     def _get_default_date_from(self):
         model = self.env.context.get('active_model', False)
         record = self.env[model].browse(self.env.context.get('active_id'))
         date_from = False
-        if model == 'sale.order':
-            date_from = record.date_order
-        elif model == 'purchase.forecast':
+        if model == 'purchase.forecast':
             reg_date = record.date_from
             cur_year = fields.Date.from_string(reg_date).year
             date_from = fields.Date.from_string(reg_date).replace(
@@ -245,35 +226,22 @@ class PurchaseSaleForecastLoad(models.TransientModel):
         model = self.env.context.get('active_model', False)
         record = self.env[model].browse(self.env.context.get('active_id'))
         date_to = False
-        if model == 'sale.order':
-            date_to = record.date_order
-        elif model == 'purchase.forecast':
+        if model == 'purchase.forecast':
             reg_date = record.date_to
             cur_year = fields.Date.from_string(reg_date).year
             date_to = fields.Date.from_string(reg_date).replace(
                 year=cur_year-1)
         return date_to
 
-    partner_id = fields.Many2one("res.partner", string="Partner",
-                                 default=_get_default_partner)
+    partner_id = fields.Many2one("res.partner", string="Partner")
     date_from = fields.Date(string="Date from", default=_get_default_date_from)
     date_to = fields.Date(string="Date to", default=_get_default_date_to)
-    sale_id = fields.Many2one("sale.order", "Sale",
-                              default=_get_default_sale)
     forecast_id = fields.Many2one("purchase.forecast", "Forecast",
                                   default=_get_default_forecast)
     product_categ_id = fields.Many2one("product.category", string="Category")
-    product_tmpl_id = fields.Many2one("product.template", string="Template")
     product_id = fields.Many2one("product.product", string="Product")
 
     factor = fields.Float(string="Factor", default=1)
-
-    @api.onchange('sale_id')
-    def sale_onchange(self):
-        if self.sale_id:
-            self.partner_id = self.sale_id.partner_id.id
-            self.date_from = self.sale_id.date_order
-            self.date_to = self.sale_id.date_order
 
     @api.onchange('forecast_id')
     def forecast_onchange(self):
@@ -313,10 +281,10 @@ class PurchaseSaleForecastLoad(models.TransientModel):
             if used_in not in res[partner][product]:
                 res[partner][product][used_in] = {'qty': 0.0, 'amount': 0.0}
             product_dict = res[partner][product][used_in]
-            sum_qty = product_dict['qty'] + sale['product_uom_qty']
+            sum_qty = product_dict['qty'] + sale['product_uom_qty'] * factor
             sum_subtotal = (product_dict['amount'] +
                             sale['price_subtotal'])
-            product_dict['qty'] = sum_qty * factor
+            product_dict['qty'] = sum_qty
             product_dict['amount'] = sum_subtotal
         return res
 
@@ -327,20 +295,15 @@ class PurchaseSaleForecastLoad(models.TransientModel):
         product_obj = self.env['product.product']
         self.ensure_one()
         sales = []
-        if self.sale_id:
-            sales = self.sale_id
-        else:
-            sale_domain = [('date_order', '>=', self.date_from),
-                           ('date_order', '<=', self.date_to)]
-            if self.partner_id:
-                sale_domain += [('partner_id', '=', self.partner_id.id)]
-            sales = sale_obj.search(sale_domain)
+        sale_domain = [('date_order', '>=', self.date_from),
+                       ('date_order', '<=', self.date_to),
+                       ('state', 'in', ['sale', 'done'])]
+        if self.partner_id:
+            sale_domain += [('partner_id', '=', self.partner_id.id)]
+        sales = sale_obj.search(sale_domain)
         sale_line_domain = [('order_id', 'in', sales.ids)]
         if self.product_id:
             sale_line_domain += [('product_id', '=', self.product_id.id)]
-        elif self.product_tmpl_id:
-            sale_line_domain += [('product_tmpl_id', '=',
-                                  self.product_tmpl_id.id)]
         elif self.product_categ_id:
             products = product_obj.search([('categ_id', '=',
                                             self.product_categ_id.id)])
@@ -378,7 +341,7 @@ class PurchaseSaleForecastLoad(models.TransientModel):
                     'product_id': material['product_id'].id,
                     'product_uom_qty': material['product_uom_qty'],
                     'price_subtotal': material['product_uom_qty'] * material[
-                                                'product_id'].standard_price
+                        'product_id'].standard_price
                     })
 
         return sale_lines_to_purchase
@@ -405,22 +368,22 @@ class PurchaseSaleForecastLoad(models.TransientModel):
                         partner_id = seller.name.id
 
                     line = forecast_line_obj.search([
-                            ('forecast_id', '=', self.forecast_id.id),
-                            ('used_in', '=', used_in.id if used_in else False),
-                            ('product_id', '=', product.id)
-                                ])
+                        ('forecast_id', '=', self.forecast_id.id),
+                        ('used_in', '=', used_in.id if used_in else False),
+                        ('product_id', '=', product.id)
+                        ])
                     if line:
                         line.qty += prod_vals['qty']
                         line.update_supplier()
                     else:
                         forecast_line_vals = {
-                                'used_in': used_in.id if used_in else False,
-                                'product_id': product.id,
-                                'forecast_id': self.forecast_id.id,
-                                'partner_id': partner_id,
-                                'qty': prod_vals['qty'],
-                                'unit_price': seller.price if seller else False
-                                              }
+                            'used_in': used_in.id if used_in else False,
+                            'product_id': product.id,
+                            'forecast_id': self.forecast_id.id,
+                            'partner_id': partner_id,
+                            'qty': prod_vals['qty'],
+                            'unit_price': seller.price if seller else False
+                        }
                         forecast_line_obj.create(forecast_line_vals)
         return True
 
@@ -428,14 +391,6 @@ class PurchaseSaleForecastLoad(models.TransientModel):
 class PurchasePurchaseForecastLoad(models.TransientModel):
 
     _name = 'purchase.purchase.forecast.load'
-
-    def _get_default_partner(self):
-        model = self.env.context.get('active_model', False)
-        record = self.env[model].browse(self.env.context.get('active_id'))
-        partner = False
-        if model == 'purchase.order':
-            partner = record.partner_id
-        return partner
 
     def _get_default_forecast(self):
         model = self.env.context.get('active_model', False)
@@ -445,21 +400,11 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
             forecast = record.id
         return forecast
 
-    def _get_default_purchase(self):
-        model = self.env.context.get('active_model', False)
-        record = self.env[model].browse(self.env.context.get('active_id'))
-        purchase = False
-        if model == 'purchase.order':
-            purchase = record.id
-        return purchase
-
     def _get_default_date_from(self):
         model = self.env.context.get('active_model', False)
         record = self.env[model].browse(self.env.context.get('active_id'))
         date_from = False
-        if model == 'purchase.order':
-            date_from = record.date_order
-        elif model == 'purchase.forecast':
+        if model == 'purchase.forecast':
             date_from = record.date_from
         return date_from
 
@@ -467,31 +412,18 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
         model = self.env.context.get('active_model', False)
         record = self.env[model].browse(self.env.context.get('active_id'))
         date_to = False
-        if model == 'purchase.order':
-            date_to = record.date_order
-        elif model == 'purchase.forecast':
+        if model == 'purchase.forecast':
             date_to = record.date_to
         return date_to
 
-    partner_id = fields.Many2one("res.partner", string="Partner",
-                                 default=_get_default_partner)
+    partner_id = fields.Many2one("res.partner", string="Partner")
     date_from = fields.Date(string="Date from", default=_get_default_date_from)
     date_to = fields.Date(string="Date to", default=_get_default_date_to)
-    purchase_id = fields.Many2one("purchase.order", "Purchase",
-                                  default=_get_default_purchase)
     forecast_id = fields.Many2one("purchase.forecast", "Forecast",
                                   default=_get_default_forecast)
     product_categ_id = fields.Many2one("product.category", string="Category")
-    product_tmpl_id = fields.Many2one("product.template", string="Template")
     product_id = fields.Many2one("product.product", string="Product")
     factor = fields.Float(string="Factor", default=1)
-
-    @api.onchange('purchase_id')
-    def purchase_onchange(self):
-        if self.purchase_id:
-            self.partner_id = self.purchase_id.partner_id.id
-            self.date_from = self.purchase_id.date_order
-            self.date_to = self.purchase_id.date_order
 
     @api.onchange('forecast_id')
     def forecast_onchange(self):
@@ -511,10 +443,10 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
             if product not in res[partner]:
                 res[partner][product] = {'qty': 0.0, 'amount': 0.0}
             product_dict = res[partner][product]
-            sum_qty = product_dict['qty'] + purchase.product_qty
+            sum_qty = product_dict['qty'] + purchase.product_qty * factor
             sum_subtotal = (product_dict['amount'] +
                             purchase.price_subtotal)
-            product_dict['qty'] = sum_qty * factor
+            product_dict['qty'] = sum_qty
             product_dict['amount'] = sum_subtotal
         return res
 
@@ -525,20 +457,15 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
         product_obj = self.env['product.product']
         self.ensure_one()
         purchases = []
-        if self.purchase_id:
-            purchases = self.purchase_id
-        else:
-            purchase_domain = [('date_order', '>=', self.date_from),
-                               ('date_order', '<=', self.date_to)]
-            if self.partner_id:
-                purchase_domain += [('partner_id', '=', self.partner_id.id)]
-            purchases = purchase_obj.search(purchase_domain)
+        purchase_domain = [('date_order', '>=', self.date_from),
+                           ('date_order', '<=', self.date_to),
+                           ('state', 'in', ['purchase', 'done'])]
+        if self.partner_id:
+            purchase_domain += [('partner_id', '=', self.partner_id.id)]
+        purchases = purchase_obj.search(purchase_domain)
         purchase_line_domain = [('order_id', 'in', purchases.ids)]
         if self.product_id:
             purchase_line_domain += [('product_id', '=', self.product_id.id)]
-        elif self.product_tmpl_id:
-            purchase_line_domain += [('product_tmpl_id', '=',
-                                      self.product_tmpl_id.id)]
         elif self.product_categ_id:
             products = product_obj.search([('categ_id', '=',
                                             self.product_categ_id.id)])
@@ -557,11 +484,11 @@ class PurchasePurchaseForecastLoad(models.TransientModel):
             for product in result[partner].keys():
                 prod_vals = result[partner][product]
                 line = forecast_line_obj.search([
-                            ('forecast_id', '=', self.forecast_id.id),
-                            ('used_in', '=', False),
-                            ('partner_id', '=', partner),
-                            ('product_id', '=', product)
-                            ])
+                    ('forecast_id', '=', self.forecast_id.id),
+                    ('used_in', '=', False),
+                    ('partner_id', '=', partner),
+                    ('product_id', '=', product)
+                    ])
                 if line:
                     line.qty += prod_vals['qty']
                 else:

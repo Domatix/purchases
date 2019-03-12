@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -58,8 +57,8 @@ class SaleForecast(models.Model):
                         })
                     else:
                         materials += get_purchase_materials(
-                                                    bom_line.product_id,
-                                                    bom_line.product_qty * qty)
+                            bom_line.product_id,
+                            bom_line.product_qty * qty)
             return materials
         for record in self:
             purchase_forecast_id = self.env['purchase.forecast'].search([
@@ -86,12 +85,12 @@ class SaleForecast(models.Model):
                     used_mat = material['used_in']
                     used_in = used_mat.id if used_mat else False
                     purchase_forecast_id.write({'forecast_lines': [(0, 0, {
-                                    'product_id': material['product_id'].id,
-                                    'used_in': used_in,
-                                    'unit_price': line.unit_price,
-                                    'qty': material['product_uom_qty'],
-                                    })],
-                                    })
+                        'product_id': material['product_id'].id,
+                        'used_in': used_in,
+                        'unit_price': line.unit_price,
+                        'qty': material['product_uom_qty'],
+                        })],
+                    })
             purchase_forecast_id.update_suppliers()
         return {
             'view_type': 'form',
